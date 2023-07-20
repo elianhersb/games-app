@@ -1,0 +1,128 @@
+<div 
+  class="container-fluid virtual-height"
+>
+  <div 
+    class="row justify-content-center align-items-center h-100"
+  >
+    <div 
+      class="col-12 col-lg-4 col-md-8"
+    >
+      <div 
+        class="card p-4"
+      >
+        <div 
+          class="card-body"
+        >
+          <h3 
+            class="card-title text-center"
+          >
+            Registro de App Game
+          </h3>
+          <h5 
+            class=" my-2 text-center"
+          >
+            Unetenos!
+          </h5>
+
+          
+          <div *ngIf="registerError" class="alert alert-danger text-center mt-1 small p-1" role="alert">
+            Error en los datos Ingresados
+          </div>
+
+          <form
+            (submit)="register()"
+            [formGroup]="registerForm"
+            autocomplete="off"
+            class="needs-validation"
+            [ngClass]="{'was-validated':  (registerForm.valid && !registerError) ? true : false }"
+          >
+            <div 
+                class="form-group my-2"
+            >
+                <label 
+                    class="my-2" 
+                    for="email"
+                >
+                    Correo electrónico
+                </label>
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" placeholder="Ingrese su correo electrónico"
+                    formControlName="email"
+                    [ngClass]="{'is-invalid':  registerForm.get( 'email' )?.invalid || registerError }"
+                >
+                <div
+                    *ngIf="registerForm.get( 'email' )?.invalid " 
+                    class="invalid-feedback"
+                >
+                    El campo Correo electrónico es invalido
+                </div>
+            </div>
+
+            <div 
+            class="form-group my-2"
+            >
+
+            <label 
+                class="my-2" 
+                for="password"
+            >
+                Contraseña
+            </label>
+            <input 
+                type="password" 
+                class="form-control is-invalid" 
+                id="password" 
+                placeholder="Ingrese su contraseña"
+                formControlName="password"
+                [ngClass]="{'is-invalid':  registerForm.get( 'password' )?.invalid || registerError }"
+            >
+            <div
+                *ngIf="registerForm.get( 'password' )?.invalid" 
+                class="invalid-feedback"
+            >
+                El campo Contraseña es requerido
+            </div>
+
+            </div>
+
+            <div 
+              class="text-center"
+            >
+
+              <button 
+                type="submit" 
+                class="btn btn-primary btn-block my-2"
+              >
+                Registro
+              </button>
+
+            </div>
+
+        
+          </form>
+
+          <hr>
+
+          <div 
+            class="text-center"
+          >
+            <a 
+              [routerLink]="'/login'"
+            >
+              Ir al Login
+            </a>
+
+          </div>
+          
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+    
+</div>
+

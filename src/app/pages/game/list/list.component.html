@@ -1,0 +1,98 @@
+<div 
+    class="container p-5"
+>
+    <div 
+        class="row"
+    >
+        <div
+            class="col-12 col-md-5 pb-3"
+        >
+            <h2>Listado de Juegos</h2>
+        </div>
+
+        <div
+            class="col-12 col-md-7 px-0 " 
+        >
+            <form
+                [formGroup]="filters"
+                class="pb-3 text-end d-flex flex-column flex-md-row"
+            >
+                
+                <input 
+                    type="text"   
+                    class="form-control" 
+                    placeholder="Ingrese el juego"
+                    formControlName="title"
+                    (keyup)="getListGame()"
+                
+                >
+    
+                <select 
+                    type="select" 
+                    class="form-select my-2 mx-md-2 my-md-0" 
+                    placeholder="Genero"
+                    formControlName="category" 
+                    (change)="getListGame()"
+                >
+                    <option selected value="">Todas</option>
+                    <option *ngFor="let category of categories" [value]="category">{{ category.charAt(0).toUpperCase() + category.slice(1) }}</option>
+                
+                </select>
+    
+                <select 
+                    type="select" 
+                    class="form-select" 
+                    placeholder="Plataforma"
+                    formControlName="platform"
+                    (change)="getListGame()"
+                >
+                    <option selected value="">Todas</option>
+                    <option *ngFor="let platform of platforms" [value]="platform">{{  platform.charAt(0).toUpperCase() + platform.slice(1) }}</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+    <div 
+        class="row"
+        *ngIf="games.length > 0; else arryaEmpty"
+    >
+        <div 
+            *ngFor="let game of games.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
+            class="col-12 col-sm-6 col-md-4 col-lg-3 my-2"
+        >
+            <app-card
+                [declarations]="game"
+            />
+        </div>
+        
+        <ul class="pagination justify-content-center mt-4">
+            <li class="page-item d-flex">
+                <a style="cursor: pointer;" class="page-link mx-1" *ngIf="currentPage > 1 " (click)="onPageChange(currentPage - 1)">{{ currentPage - 1   }}</a>
+                <a style="cursor: pointer;" class="page-link mx-1 bg-primary text-white" (click)="onPageChange(currentPage)">{{ currentPage }}</a>
+                <a style="cursor: pointer;" class="page-link mx-1" *ngIf="currentPage < getPages().length " (click)="onPageChange(currentPage + 1)">{{ currentPage + 1  }}</a>
+            </li>
+        </ul>
+    </div>
+
+    <ng-template #arryaEmpty>
+
+        <div 
+            *ngIf="!loading"
+            class="row"
+        >
+            <div class="col-12">
+                <div class="alert alert-primary" role="alert">
+                    No se encontraron resultados 
+                </div>
+            </div>
+        </div>
+        
+    </ng-template>
+
+   
+</div>
+
+<app-loading  
+    *ngIf="loading"
+/>

@@ -1,0 +1,8 @@
+.virtual-height {
+    height: 100vh;
+    background-image: url(https://i.pinimg.com/564x/13/52/94/135294f4fd5e3a078cdf748529d2d360.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
