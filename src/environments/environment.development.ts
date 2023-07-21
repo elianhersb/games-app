@@ -8,5 +8,6 @@ export const environment = {
     messagingSenderId: '769540736904',
   },
     API_URL: 'https://free-to-play-games-database.p.rapidapi.com/api',
-    CORS:''
+    XRapidAPIKey: '37508f5d4fmsh71c1f5080ccb6e3p13f9f6jsn78541f6b8921',
+    XRapidAPIHost: 'free-to-play-games-database.p.rapidapi.com' 
 };

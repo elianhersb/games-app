@@ -10,27 +10,25 @@ import { IGame } from '../interfaces/IGame.interface';
 })
 export class GameService {
 
-  private apiUrl: string;
   public headers =  new HttpHeaders({ 
-    'X-RapidAPI-Key': '37508f5d4fmsh71c1f5080ccb6e3p13f9f6jsn78541f6b8921',
-    'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com' 
+    'X-RapidAPI-Key': environment.XRapidAPIKey,
+    'X-RapidAPI-Host': environment.XRapidAPIHost
   });
-  constructor(private http: HttpClient) {
-    this.apiUrl = environment.CORS + environment.API_URL; 
-  }
+
+  constructor(private http: HttpClient) {}
 
   getGames( params:any ) : Observable<IGames[]> 
   {
     const queryParams = this.getQueryParams(params);
 
-    return this.http.get<IGames[]>(`${this.apiUrl}/games${queryParams}`,{ headers: this.headers }).pipe(
+    return this.http.get<IGames[]>(`${environment.API_URL}/games${queryParams}`,{ headers: this.headers }).pipe(
       map((response) => response.filter(item => item.title?.toLowerCase().indexOf(params.title.toLowerCase()) !== -1))
     );
   }
 
   getGame( id: string ): Observable<IGame> 
   {
-    return this.http.get<IGame>(`${this.apiUrl}/game?id=${id}`,{ headers: this.headers });
+    return this.http.get<IGame>(`${environment.API_URL}/game?id=${id}`,{ headers: this.headers });
   }
 
   getQueryParams(params: any): string
